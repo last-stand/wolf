@@ -8,6 +8,19 @@ dependencies {
     antlr 'org.antlr:antlr4:4.5.2' 	// using ANTLR v4
 }
 
+generateGrammarSource {
+    /*arguments += ["-visitor", "-long-messages"]*/
+    arguments += ["-visitor", "-no-listener"]
+}
+
+task grun (type:JavaExec){
+	classpath = project.getConfigurations().getByName(AntlrPlugin.ANTLR_CONFIGURATION_NAME) + sourceSets.main.runtimeClasspath
+	main = 'org.antlr.v4.gui.TestRig'
+
+	def grammarName = "Wolf"
+	args = [grammarName, 'init', "src/main/Wolf/first.wlf"]
+}
+
 task grunGui (type:JavaExec){
 	classpath = project.getConfigurations().getByName(AntlrPlugin.ANTLR_CONFIGURATION_NAME) + sourceSets.main.runtimeClasspath
 	main = 'org.antlr.v4.gui.TestRig'
@@ -31,3 +44,7 @@ task grunTree (type:JavaExec){
 	def grammarName = "Wolf"
 	args = [grammarName, 'init', '-tree', "src/main/Wolf/first.wlf"]
 }
+
+/*antlr4 Easy.g4 -no-listener -visitor
+javac -cp /usr/local/Cellar/antlr/4.5.2/antlr-4.5.2-complete.jar: *.java
+java -cp /usr/local/Cellar/antlr/4.5.2/antlr-4.5.2-complete.jar: Easy prog.easy*/
