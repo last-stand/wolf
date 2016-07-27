@@ -13,12 +13,16 @@ generateGrammarSource {
     arguments += ["-visitor", "-no-listener"]
 }
 
-task grun (type:JavaExec){
-	classpath = project.getConfigurations().getByName(AntlrPlugin.ANTLR_CONFIGURATION_NAME) + sourceSets.main.runtimeClasspath
-	main = 'org.antlr.v4.gui.TestRig'
+task compile(type: JavaCompile) {
+  classpath = project.getConfigurations().getByName(AntlrPlugin.ANTLR_CONFIGURATION_NAME) + sourceSets.main.runtimeClasspath
+  source = fileTree(dir: 'src/main/', include: '*.java')
+  destinationDir = file('build/classes/main')
+}
 
-	def grammarName = "Wolf"
-	args = [grammarName, 'init', "src/main/Wolf/first.wlf"]
+task grun(type:JavaExec){
+  classpath = project.getConfigurations().getByName(AntlrPlugin.ANTLR_CONFIGURATION_NAME) + sourceSets.main.runtimeClasspath
+  main = 'Wolf'
+  args = ["src/main/Wolf/first.wlf"]
 }
 
 task grunGui (type:JavaExec){
@@ -45,6 +49,6 @@ task grunTree (type:JavaExec){
 	args = [grammarName, 'init', '-tree', "src/main/Wolf/first.wlf"]
 }
 
-/*antlr4 Easy.g4 -no-listener -visitor
+/* antlr4 Easy.g4 -no-listener -visitor
 javac -cp /usr/local/Cellar/antlr/4.5.2/antlr-4.5.2-complete.jar: *.java
-java -cp /usr/local/Cellar/antlr/4.5.2/antlr-4.5.2-complete.jar: Easy prog.easy*/
+java -cp /usr/local/Cellar/antlr/4.5.2/antlr-4.5.2-complete.jar: Easy prog.easy */
