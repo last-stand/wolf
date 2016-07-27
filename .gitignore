@@ -1,7 +1,2 @@
-.idea/
 .gradle
-/gradle
-/build
-*.iml
-gradlew*
-/grammarOut
+build/

@@ -1,5 +1,6 @@
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
+import grammar.*;
 public class Wolf {
     public static void main(String[] args) throws Exception {
         ANTLRInputStream inputStream = new ANTLRInputStream(System.in);

@@ -1,0 +1,33 @@
+apply plugin: 'antlr'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    antlr 'org.antlr:antlr4:4.5.2' 	// using ANTLR v4
+}
+
+task grunGui (type:JavaExec){
+	classpath = project.getConfigurations().getByName(AntlrPlugin.ANTLR_CONFIGURATION_NAME) + sourceSets.main.runtimeClasspath
+	main = 'org.antlr.v4.gui.TestRig'
+
+	def grammarName = "Wolf"
+	args = [grammarName, 'init', '-gui', "src/main/Wolf/first.wlf"]
+}
+
+task grunToken (type:JavaExec){
+	classpath = project.getConfigurations().getByName(AntlrPlugin.ANTLR_CONFIGURATION_NAME) + sourceSets.main.runtimeClasspath
+	main = 'org.antlr.v4.gui.TestRig'
+
+	def grammarName = "Wolf"
+	args = [grammarName, 'init', '-tokens', "src/main/Wolf/first.wlf"]
+}
+
+task grunTree (type:JavaExec){
+	classpath = project.getConfigurations().getByName(AntlrPlugin.ANTLR_CONFIGURATION_NAME) + sourceSets.main.runtimeClasspath
+	main = 'org.antlr.v4.gui.TestRig'
+
+	def grammarName = "Wolf"
+	args = [grammarName, 'init', '-tree', "src/main/Wolf/first.wlf"]
+}
