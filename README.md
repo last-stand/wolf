@@ -21,3 +21,7 @@ I am using [Gradle ANTLR Plugin](https://docs.gradle.org/current/userguide/antlr
   `gradle grunToken`
 5. To visualize AST in console, run
   `gradle grunTree`
+  **Note: **
+  While running above tasks use **-no-daemon** option if using Gradle Daemon. Then only it will ask for command line input. Provide input string or filename with path to parse.If you want to skip press return/enter⏎. By default it will take `src/main/Wolf/first.wlf` sample file as input.
+  `gradle grun -no-daemon`
+  It will ask for input on `compile` task as well, press return/enter⏎ to skip input.
