@@ -6,24 +6,26 @@ _Wolf_ is my simple programming language which is created using [ANTLR](http://w
 I am using [Gradle ANTLR Plugin](https://docs.gradle.org/current/userguide/antlr_plugin.html) for build. Here we have given input file which is `src/main/Wolf/first.wlf` in gradle.build task.
 
 ##Running Parser
-1. To compile class where we are using our generated parser, run
+1. To compile class where we are using our generated parser, run <br />
   `gradle compile`
-2. To run all compiled classes along with our generated parser, run
+2. To run all compiled classes along with our generated parser, run <br />
   `gradle grun`
+  <br />
   By default it will take `src/main/Wolf/first.wlf` sample file as input. We can change it by changing the args in build.gradle,
+  <br />
   `task run(type:JavaExec){
     ........
     args = ["src/main/Wolf/first.wlf"]
   }`
-3. To visualize the AST in gui, run
+3. To visualize the AST in gui, run <br />
   `gradle grunGui`
-4. To visualize tokens, run
+4. To visualize tokens, run <br />
   `gradle grunToken`
-5. To visualize AST in console, run
+5. To visualize AST in console, run <br />
   `gradle grunTree`
   <br />
   **Note: **
-  While running above tasks use **-no-daemon** option if using Gradle Daemon. Then only it will ask for command line input. Provide input string or filename with path to parse.If you want to skip press return/enter⏎. By default it will take `src/main/Wolf/first.wlf` sample file as input.<br />
-  `gradle grun -no-daemon`
+  >While running above tasks use `-no-daemon` option if using Gradle Daemon. Then only it will ask for command line input. Provide input string or filename with path to parse.If you want to skip press return/enter⏎. By default it will take `src/main/Wolf/first.wlf` sample file as input.<br />
+  >`gradle grun -no-daemon`
   <br />
-  It will ask for input on `compile` task as well, press return/enter⏎ to skip input.
+  >It will ask for input on `compile` task as well, press return/enter⏎ to skip input.
