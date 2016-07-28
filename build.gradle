@@ -13,32 +13,10 @@ generateGrammarSource {
     arguments += ["-visitor", "-no-listener"]
 }
 
-def input = ''
-gradle.taskGraph.whenReady { taskGraph ->
-  if(taskGraph.hasTask(':grun')) {
-    input = takeInput()
-  }
-}
-
-def takeInput() {
-  def console = System.console()
-  if (console)
-    return console.readLine('\n> Please enter input string or filename to parse OR press enter⏎ to skip:\n')
-  else
-    logger.error "Cannot get console. Using default inputFile src/main/Wolf/first.wlf"
-  return ''
-}
-
-task compile(type: JavaCompile) {
+task compile(type: JavaCompile){
   classpath = project.getConfigurations().getByName(AntlrPlugin.ANTLR_CONFIGURATION_NAME) + sourceSets.main.runtimeClasspath
   source = fileTree(dir: 'src/main/', include: '*.java')
   destinationDir = file('build/classes/main')
-}
-
-task grun(type:JavaExec){
-  classpath = project.getConfigurations().getByName(AntlrPlugin.ANTLR_CONFIGURATION_NAME) + sourceSets.main.runtimeClasspath
-  main = 'Wolf'
-  args = input.length() > 0 ? [input] : ["src/main/Wolf/first.wlf"]
 }
 
 task grunGui (type:JavaExec){
@@ -65,9 +43,18 @@ task grunTree (type:JavaExec){
 	args = [grammarName, 'init', '-tree', "src/main/Wolf/first.wlf"]
 }
 
-/* antlr4 Easy.g4 -no-listener -visitor
-javac -cp /usr/local/Cellar/antlr/4.5.2/antlr-4.5.2-complete.jar: *.java
-java -cp /usr/local/Cellar/antlr/4.5.2/antlr-4.5.2-complete.jar:build/classes/main Wolf
-java -cp /usr/local/Cellar/antlr/4.5.2/antlr-4.5.2-complete.jar:build/classes/main Wolf src/main/Wolf/first.wlf
-gradle -s grun -Pwolfargs="['last.wlf']"
-*/
+def ask() {
+  def console = System.console()
+  if (console)
+    return console.readLine('\n> Please enter input string or filename to parse OR press enter⏎ to skip:\n')
+  else
+    logger.error "Cannot get console. Using default inputFile src/main/Wolf/first.wlf"
+  return ''
+}
+
+task grun(type:JavaExec) {
+    classpath = project.getConfigurations().getByName(AntlrPlugin.ANTLR_CONFIGURATION_NAME) + sourceSets.main.runtimeClasspath
+    main = 'Wolf'
+    def input = ask()
+    args = input.length() > 0 ? [input] : ["src/main/Wolf/first.wlf"]
+}

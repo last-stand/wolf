@@ -13,7 +13,7 @@ public class Wolf {
         if (args.length > 0 )
           inputFile = args[0];
         else
-          System.out.println("Enter input string to parse: ");
+          System.out.println("Enter input string to parse: \n");
 
         InputStream is = System.in;
         if (inputFile != null ){
