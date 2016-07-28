@@ -22,7 +22,14 @@ task compile(type: JavaCompile) {
 task grun(type:JavaExec){
   classpath = project.getConfigurations().getByName(AntlrPlugin.ANTLR_CONFIGURATION_NAME) + sourceSets.main.runtimeClasspath
   main = 'Wolf'
-  args = ["src/main/Wolf/first.wlf"]
+  def console = System.console()
+  def input
+  if (console) {
+      input = console.readLine('\n> Please enter input string or filename to parse OR press enter⏎ to skip:\n')
+  } else {
+      logger.error "Cannot get console."
+  }
+  args = input.length() > 0 ? [input] : ["src/main/Wolf/first.wlf"]
 }
 
 task grunGui (type:JavaExec){
@@ -51,4 +58,7 @@ task grunTree (type:JavaExec){
 
 /* antlr4 Easy.g4 -no-listener -visitor
 javac -cp /usr/local/Cellar/antlr/4.5.2/antlr-4.5.2-complete.jar: *.java
-java -cp /usr/local/Cellar/antlr/4.5.2/antlr-4.5.2-complete.jar: Easy prog.easy */
+java -cp /usr/local/Cellar/antlr/4.5.2/antlr-4.5.2-complete.jar:build/classes/main Wolf
+java -cp /usr/local/Cellar/antlr/4.5.2/antlr-4.5.2-complete.jar:build/classes/main Wolf src/main/Wolf/first.wlf
+gradle -s grun -Pwolfargs="['last.wlf']"
+*/
