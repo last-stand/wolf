@@ -25,6 +25,9 @@ public class Wolf {
         CommonTokenStream tokenStream = new CommonTokenStream(lexer);
         WolfParser parser = new WolfParser(tokenStream);
         ParseTree tree = parser.init();
-        System.out.println(tree.toStringTree(parser));
+        // System.out.println(tree.toStringTree(parser));
+        ParseTreeWalker walker = new ParseTreeWalker();
+        walker.walk(new ShortToUnicodeString(), tree);
+        System.out.println();
     }
 }

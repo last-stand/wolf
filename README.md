@@ -19,7 +19,7 @@ I am using [Gradle ANTLR Plugin](https://docs.gradle.org/current/userguide/antlr
   `gradle grunToken`
 * To visualize AST in console, run <br />
   `gradle grunTree`
-<br /><br/>
+
 **Using shell script**<br />
   Run `run.sh` script after building parser. You can pass input file as parameter otherwise it will ask for input on console.<br />
   `sh run.sh src/main/Wolf/first.wlf`
@@ -27,7 +27,8 @@ I am using [Gradle ANTLR Plugin](https://docs.gradle.org/current/userguide/antlr
   *OR*
   `sh run.sh`<br />
   `Enter input string to parse:`<br />
-  `{12, 89, {34, 7}, {1, 5, 7}, 6}`
+  `{12, 89, {34, 7}, {1, 5, 7}, 6}`<br />
+  Now press **ctrl+d** to see the output after giving input.
 
 ### Note:
 >  By default above gradle commands will take `src/main/Wolf/first.wlf` sample file as input. We can change it by changing the args in build.gradle,

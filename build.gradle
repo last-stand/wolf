@@ -10,7 +10,8 @@ dependencies {
 
 generateGrammarSource {
     /*arguments += ["-visitor", "-long-messages"]*/
-    arguments += ["-visitor", "-no-listener"]
+    /*arguments += ["-visitor", "-no-listener"]*/
+    arguments += ["-visitor", "-listener"]
 }
 
 task compile(type: JavaCompile){
@@ -27,7 +28,7 @@ task grunGui (type:JavaExec){
 	args = [grammarName, 'init', '-gui', "src/main/Wolf/first.wlf"]
 }
 
-task grunToken (type:JavaExec){
+task grunTokens (type:JavaExec){
 	classpath = project.getConfigurations().getByName(AntlrPlugin.ANTLR_CONFIGURATION_NAME) + sourceSets.main.runtimeClasspath
 	main = 'org.antlr.v4.gui.TestRig'
 
