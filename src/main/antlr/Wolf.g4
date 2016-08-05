@@ -1,6 +1,6 @@
 grammar Wolf;
-init : (prog)* ;
-prog : '{' value (',' value)* '}' ;
+prog : (init)* ;
+init : '{' value (',' value)* '}' ;
 value : init | INT
 ;
 INT : [0-9]+ ;

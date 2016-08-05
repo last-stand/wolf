@@ -25,7 +25,7 @@ task grunGui (type:JavaExec){
 	main = 'org.antlr.v4.gui.TestRig'
 
 	def grammarName = "Wolf"
-	args = [grammarName, 'init', '-gui', "src/main/Wolf/first.wlf"]
+	args = [grammarName, 'prog', '-gui', "src/main/Wolf/first.wlf"]
 }
 
 task grunTokens (type:JavaExec){
@@ -33,7 +33,7 @@ task grunTokens (type:JavaExec){
 	main = 'org.antlr.v4.gui.TestRig'
 
 	def grammarName = "Wolf"
-	args = [grammarName, 'init', '-tokens', "src/main/Wolf/first.wlf"]
+	args = [grammarName, 'prog', '-tokens', "src/main/Wolf/first.wlf"]
 }
 
 task grunTree (type:JavaExec){
@@ -41,7 +41,7 @@ task grunTree (type:JavaExec){
 	main = 'org.antlr.v4.gui.TestRig'
 
 	def grammarName = "Wolf"
-	args = [grammarName, 'init', '-tree', "src/main/Wolf/first.wlf"]
+	args = [grammarName, 'prog', '-tree', "src/main/Wolf/first.wlf"]
 }
 
 def ask() {
