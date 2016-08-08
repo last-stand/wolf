@@ -26,6 +26,6 @@ public class Wolf {
         WolfParser parser = new WolfParser(tokenStream);
         ParseTree tree = parser.prog();
         System.out.println(tree.toStringTree(parser));
-        ParseTreeWalker walker = new ParseTreeWalker();
+        // ParseTreeWalker walker = new ParseTreeWalker();
     }
 }
