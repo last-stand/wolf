@@ -1,4 +1,5 @@
 apply plugin: 'antlr'
+import groovy.json.JsonSlurper
 
 repositories {
     mavenCentral()
@@ -10,8 +11,7 @@ dependencies {
 
 generateGrammarSource {
     /*arguments += ["-visitor", "-long-messages"]*/
-    /*arguments += ["-visitor", "-no-listener"]*/
-    arguments += ["-visitor", "-listener"]
+    arguments += ["-visitor", "-no-listener"]
 }
 
 task compile(type: JavaCompile){
@@ -20,42 +20,17 @@ task compile(type: JavaCompile){
   destinationDir = file('build/classes/main')
 }
 
-task grunGui (type:JavaExec){
+task grun (type:JavaExec){
 	classpath = project.getConfigurations().getByName(AntlrPlugin.ANTLR_CONFIGURATION_NAME) + sourceSets.main.runtimeClasspath
 	main = 'org.antlr.v4.gui.TestRig'
 
 	def grammarName = "Wolf"
-	args = [grammarName, 'prog', '-gui', "src/main/Wolf/first.wlf"]
-}
-
-task grunTokens (type:JavaExec){
-	classpath = project.getConfigurations().getByName(AntlrPlugin.ANTLR_CONFIGURATION_NAME) + sourceSets.main.runtimeClasspath
-	main = 'org.antlr.v4.gui.TestRig'
-
-	def grammarName = "Wolf"
-	args = [grammarName, 'prog', '-tokens', "src/main/Wolf/first.wlf"]
-}
-
-task grunTree (type:JavaExec){
-	classpath = project.getConfigurations().getByName(AntlrPlugin.ANTLR_CONFIGURATION_NAME) + sourceSets.main.runtimeClasspath
-	main = 'org.antlr.v4.gui.TestRig'
-
-	def grammarName = "Wolf"
-	args = [grammarName, 'prog', '-tree', "src/main/Wolf/first.wlf"]
-}
-
-def ask() {
-  def console = System.console()
-  if (console)
-    return console.readLine('\n> Please enter input string or filename to parse OR press enter⏎ to skip:\n')
-  else
-    logger.error "Cannot get console. Using default inputFile src/main/Wolf/first.wlf"
-  return ''
-}
-
-task grun(type:JavaExec) {
-    classpath = project.getConfigurations().getByName(AntlrPlugin.ANTLR_CONFIGURATION_NAME) + sourceSets.main.runtimeClasspath
-    main = 'Wolf'
-    def input = ask()
-    args = input.length() > 0 ? [input] : ["src/main/Wolf/first.wlf"]
+  def option = "-gui"
+  def input = "src/main/Wolf/first.wlf"
+  if (project.hasProperty('wolfargs')){
+    def params = wolfargs.split(',')
+    option = params[0].trim()
+    input = params.size() > 1 && params[1].length() > 0 ? params[1].trim() : input
+  }
+	args = [grammarName, 'prog', option, input]
 }
