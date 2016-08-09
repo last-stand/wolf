@@ -23,7 +23,7 @@ showError () {
 case ${OPTION} in
   "-b")
        echo "${GREEN}## Building whole source...${WHITE}"
-       gradle clean compile -Pwolfargs=''
+       gradle clean compile
   ;;
   "")
     if [ -d "build/classes/main" ]
