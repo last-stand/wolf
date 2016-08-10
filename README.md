@@ -51,13 +51,33 @@ Now press **ctrl+d** or **ctrl+z** to see the output after giving input.<br />
 
 ```bash
 $ sh run.sh -a
-Enter input string to parse:
-1+2+3
-(prog (stat (expr (expr (expr 1) + (expr 2)) + (expr 3)) \n))
+## Running...
+Enter data and press ctrl+d(Unix based OS) or ctrl+z(Windows) to see the output:
+a=4
+b=10
+c=a+b
+b=a
+c
+b
+
+Output:
+14
+4
 ```
 **OR**<br />
+Now pass input from a file. Here it is `example.wlf` and this is the content in it:
 ```bash
-$ sh run.sh -a src/main/Wolf/last.wlf
+193
+a=5
+b=6
+a+b*2
+(1+2)*3
+```
+Now run it.
+```bash
+$ sh run.sh -a example.wlf
 ## Running...
-(prog (stat (expr (expr ( (expr (expr (expr (expr 100) / (expr 50)) + (expr 3)) ** (expr 2)) )) - (expr (expr 8) / (expr 4))) \n) (stat (expr (expr (expr (expr 13) + (expr 22)) - (expr (expr 8) * (expr 9))) ** (expr 2)) \n))
+193
+17
+9
 ```
