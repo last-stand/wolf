@@ -26,7 +26,7 @@ task grun (type:JavaExec){
 
 	def grammarName = "Wolf"
   def option = "-gui"
-  def input = "src/main/Wolf/first.wlf"
+  def input = "example.wlf"
   if (project.hasProperty('wolfargs')){
     def params = wolfargs.split(',')
     option = params[0].trim()

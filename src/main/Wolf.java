@@ -13,7 +13,7 @@ public class Wolf {
         if (args.length > 0 )
           inputFile = args[0];
         else
-          System.out.println("Enter input string to parse: \n");
+          System.out.println("Enter data and press ctrl+d(Unix based OS) or ctrl+z(Windows) to see the output:");
 
         InputStream is = System.in;
         if (inputFile != null ){
@@ -25,7 +25,8 @@ public class Wolf {
         CommonTokenStream tokenStream = new CommonTokenStream(lexer);
         WolfParser parser = new WolfParser(tokenStream);
         ParseTree tree = parser.prog();
-        System.out.println(tree.toStringTree(parser));
+        EvalVisitor eval = new EvalVisitor();
+        eval.visit(tree);
         // ParseTreeWalker walker = new ParseTreeWalker();
     }
 }
