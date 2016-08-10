@@ -1,15 +1,16 @@
 grammar Wolf;
 import CommonLexerRules;
 
-prog: stat+ ;
-stat: expr NEWLINE
-    | ID ASSIGN expr NEWLINE
-    | NEWLINE
+prog:   stat+ ;
+
+stat: expr NEWLINE                 # printExpr
+    | ID ASSIGN expr NEWLINE       # assign
+    | NEWLINE                      # blank
     ;
-expr: expr (MUL | DIV) expr
-    | expr (ADD | SUB) expr
-    | expr POW expr
-    | INT
-    | ID
-    | '(' expr ')'
+expr: expr op=(MUL | DIV) expr     # MulDiv
+    | expr op=(ADD | SUB) expr     # AddSub
+    | expr POW expr                # power
+    | INT                          # int
+    | ID                           # id
+    | '(' expr ')'                 # parens
     ;
